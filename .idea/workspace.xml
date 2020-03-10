@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="SysPro_1" targetName="SysPro_1" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b7a5acda-ed62-4670-8074-6127c9727596" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/structs.h" beforeDir="false" afterPath="$PROJECT_DIR$/structs.h" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1YvUPllMbRf7K88vcBscsJDLSyg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager">
+    <configuration name="SysPro_1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="SysPro_1" TARGET_NAME="SysPro_1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="SysPro_1" RUN_TARGET_NAME="SysPro_1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b7a5acda-ed62-4670-8074-6127c9727596" name="Default Changelist" comment="" />
+      <created>1583822539733</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583822539733</updated>
+      <workItem from="1583822542163" duration="1501000" />
+      <workItem from="1583858830439" duration="809000" />
+      <workItem from="1583859973057" duration="129000" />
+      <workItem from="1583860109487" duration="328000" />
+      <workItem from="1583908396493" duration="2055000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2020" y="104" width="1720" height="876" key="DiffContextDialog" timestamp="1583910801997">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2020" y="104" width="1720" height="876" key="DiffContextDialog/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860030719" />
+    <state x="2020" y="104" width="1720" height="876" key="DiffContextDialog/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583910801997" />
+    <state width="1872" height="352" key="GridCell.Tab.0.bottom" timestamp="1583860436999">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
+    <state width="1872" height="352" key="GridCell.Tab.0.center" timestamp="1583860436999">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.0.center/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
+    <state width="1872" height="352" key="GridCell.Tab.0.left" timestamp="1583860436998">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.0.left/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436998" />
+    <state width="1872" height="352" key="GridCell.Tab.0.right" timestamp="1583860436999">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.0.right/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
+    <state width="1872" height="352" key="GridCell.Tab.1.bottom" timestamp="1583860437000">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860437000" />
+    <state width="1872" height="352" key="GridCell.Tab.1.center" timestamp="1583860437000">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.1.center/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860437000" />
+    <state width="1872" height="352" key="GridCell.Tab.1.left" timestamp="1583860436999">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.1.left/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
+    <state width="1872" height="352" key="GridCell.Tab.1.right" timestamp="1583860437000">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="352" key="GridCell.Tab.1.right/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860437000" />
+    <state x="2668" y="204" width="414" height="676" key="RollbackChangesDialog" timestamp="1583860427365">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2668" y="204" width="414" height="676" key="RollbackChangesDialog/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860427365" />
+    <state x="2354" y="177" key="SettingsEditor" timestamp="1583910749263">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2354" y="177" key="SettingsEditor/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860101966" />
+    <state x="2354" y="177" key="SettingsEditor/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583910749263" />
+    <state x="2020" y="104" width="1720" height="876" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1583860157252">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2020" y="104" width="1720" height="876" key="com.intellij.dvcs.ui.CompareBranchesDialog/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860157252" />
+    <state x="2516" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1583910757699">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2516" y="367" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860109712" />
+    <state x="2516" y="367" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583910757699" />
+    <state x="2543" y="242" width="672" height="678" key="search.everywhere.popup" timestamp="1583824709543">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2543" y="242" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583824709543" />
+  </component>
+</project>

@@ -7,8 +7,18 @@
 #IncludeRegexTransform: 
 
 /home/theo/CLionProjects/SysPro-1/main.c
-stdio.h
--
+mainFunctions.h
+/home/theo/CLionProjects/SysPro-1/mainFunctions.h
+
+/home/theo/CLionProjects/SysPro-1/mainFunctions.c
+mainFunctions.h
+/home/theo/CLionProjects/SysPro-1/mainFunctions.h
+
+/home/theo/CLionProjects/SysPro-1/mainFunctions.h
 stdlib.h
+-
+string.h
+-
+stdio.h
 -
 

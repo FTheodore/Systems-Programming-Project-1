@@ -13,18 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b7a5acda-ed62-4670-8074-6127c9727596" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/SysPro_1.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/SysPro_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/SysPro_1.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structs.h" beforeDir="false" afterPath="$PROJECT_DIR$/structs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/SysPro_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/SysPro_1" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +63,7 @@
       <workItem from="1583908396493" duration="2055000" />
       <workItem from="1583910756673" duration="940000" />
       <workItem from="1583911808472" duration="443000" />
-      <workItem from="1583912259881" duration="3577000" />
+      <workItem from="1583912259881" duration="3983000" />
     </task>
     <servers />
   </component>
@@ -108,38 +97,46 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2659" y="300" key="FileChooserDialogImpl/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583915833746" />
-    <state width="1872" height="352" key="GridCell.Tab.0.bottom" timestamp="1583860436999">
+    <state width="1872" height="351" key="GridCell.Tab.0.bottom" timestamp="1583916189919">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
-    <state width="1872" height="352" key="GridCell.Tab.0.center" timestamp="1583860436999">
+    <state width="1872" height="351" key="GridCell.Tab.0.bottom/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916189919" />
+    <state width="1872" height="351" key="GridCell.Tab.0.center" timestamp="1583916189919">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.0.center/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
-    <state width="1872" height="352" key="GridCell.Tab.0.left" timestamp="1583860436998">
+    <state width="1872" height="351" key="GridCell.Tab.0.center/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916189919" />
+    <state width="1872" height="351" key="GridCell.Tab.0.left" timestamp="1583916189919">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.0.left/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436998" />
-    <state width="1872" height="352" key="GridCell.Tab.0.right" timestamp="1583860436999">
+    <state width="1872" height="351" key="GridCell.Tab.0.left/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916189919" />
+    <state width="1872" height="351" key="GridCell.Tab.0.right" timestamp="1583916189919">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.0.right/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
-    <state width="1872" height="352" key="GridCell.Tab.1.bottom" timestamp="1583860437000">
+    <state width="1872" height="351" key="GridCell.Tab.0.right/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916189919" />
+    <state width="1872" height="351" key="GridCell.Tab.1.bottom" timestamp="1583916190072">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.1.bottom/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860437000" />
-    <state width="1872" height="352" key="GridCell.Tab.1.center" timestamp="1583860437000">
+    <state width="1872" height="351" key="GridCell.Tab.1.bottom/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916190072" />
+    <state width="1872" height="351" key="GridCell.Tab.1.center" timestamp="1583916190072">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.1.center/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860437000" />
-    <state width="1872" height="352" key="GridCell.Tab.1.left" timestamp="1583860436999">
+    <state width="1872" height="351" key="GridCell.Tab.1.center/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916190072" />
+    <state width="1872" height="351" key="GridCell.Tab.1.left" timestamp="1583916190072">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.1.left/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860436999" />
-    <state width="1872" height="352" key="GridCell.Tab.1.right" timestamp="1583860437000">
+    <state width="1872" height="351" key="GridCell.Tab.1.left/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916190072" />
+    <state width="1872" height="351" key="GridCell.Tab.1.right" timestamp="1583916190072">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1872" height="352" key="GridCell.Tab.1.right/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583860437000" />
+    <state width="1872" height="351" key="GridCell.Tab.1.right/1920.0.1920.1080/3840.0.1280.1024/0.34.1920.1046@1920.0.1920.1080" timestamp="1583916190072" />
     <state x="2668" y="204" width="414" height="676" key="RollbackChangesDialog" timestamp="1583860427365">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -166,5 +163,16 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2543" y="242" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1080/0.34.1920.1046@1920.0.1920.1080" timestamp="1583824709543" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.c</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

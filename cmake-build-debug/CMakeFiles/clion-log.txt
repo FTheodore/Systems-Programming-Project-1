@@ -1,4 +1,0 @@
-/home/theo/clion-2019.3.4/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/theo/CLionProjects/SysPro-1
--- Configuring done
--- Generating done
--- Build files have been written to: /home/theo/CLionProjects/SysPro-1/cmake-build-debug

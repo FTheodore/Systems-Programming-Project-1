@@ -1,3 +1,0 @@
-/home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles/SysPro_1.dir
-/home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles/edit_cache.dir

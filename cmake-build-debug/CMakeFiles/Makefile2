@@ -74,12 +74,12 @@ preinstall:
 CMakeFiles/SysPro_1.dir/all:
 	$(MAKE) -f CMakeFiles/SysPro_1.dir/build.make CMakeFiles/SysPro_1.dir/depend
 	$(MAKE) -f CMakeFiles/SysPro_1.dir/build.make CMakeFiles/SysPro_1.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target SysPro_1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target SysPro_1"
 .PHONY : CMakeFiles/SysPro_1.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/SysPro_1.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/SysPro_1.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/theo/CLionProjects/SysPro-1/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/SysPro_1.dir/rule

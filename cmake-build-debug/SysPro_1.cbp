@@ -81,6 +81,12 @@
 		<Unit filename="/home/theo/CLionProjects/SysPro-1/main.c">
 			<Option target="SysPro_1"/>
 		</Unit>
+		<Unit filename="/home/theo/CLionProjects/SysPro-1/mainFunctions.c">
+			<Option target="SysPro_1"/>
+		</Unit>
+		<Unit filename="/home/theo/CLionProjects/SysPro-1/mainFunctions.h">
+			<Option target="SysPro_1"/>
+		</Unit>
 		<Unit filename="/home/theo/CLionProjects/SysPro-1/structs.h">
 			<Option target="SysPro_1"/>
 		</Unit>

@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/SysPro_1.dir/main.c.o  -o SysPro_1 
+/usr/bin/cc -g   CMakeFiles/SysPro_1.dir/main.c.o CMakeFiles/SysPro_1.dir/mainFunctions.c.o  -o SysPro_1 

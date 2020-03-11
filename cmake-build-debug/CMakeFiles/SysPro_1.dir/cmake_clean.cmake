@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/SysPro_1.dir/main.c.o"
+  "CMakeFiles/SysPro_1.dir/mainFunctions.c.o"
   "SysPro_1"
   "SysPro_1.pdb"
 )

@@ -150,6 +150,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/SysPro_1.dir/build.make CMakeFiles/SysPro_1.dir/main.c.s
 .PHONY : main.c.s
 
+mainFunctions.o: mainFunctions.c.o
+
+.PHONY : mainFunctions.o
+
+# target to build an object file
+mainFunctions.c.o:
+	$(MAKE) -f CMakeFiles/SysPro_1.dir/build.make CMakeFiles/SysPro_1.dir/mainFunctions.c.o
+.PHONY : mainFunctions.c.o
+
+mainFunctions.i: mainFunctions.c.i
+
+.PHONY : mainFunctions.i
+
+# target to preprocess a source file
+mainFunctions.c.i:
+	$(MAKE) -f CMakeFiles/SysPro_1.dir/build.make CMakeFiles/SysPro_1.dir/mainFunctions.c.i
+.PHONY : mainFunctions.c.i
+
+mainFunctions.s: mainFunctions.c.s
+
+.PHONY : mainFunctions.s
+
+# target to generate assembly for a file
+mainFunctions.c.s:
+	$(MAKE) -f CMakeFiles/SysPro_1.dir/build.make CMakeFiles/SysPro_1.dir/mainFunctions.c.s
+.PHONY : mainFunctions.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mainFunctions.o"
+	@echo "... mainFunctions.i"
+	@echo "... mainFunctions.s"
 .PHONY : help
 
 

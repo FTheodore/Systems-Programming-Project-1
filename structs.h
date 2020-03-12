@@ -31,12 +31,16 @@ typedef struct hashTable {
     int arraySize;
 } hashTable;
 
-typedef struct treeNode {
-    //******//
-} treeNode;
+typedef struct avlNode {
+    struct avlNode * lChild;
+    struct avlNode * rChild;
+    int height;
+    listNode * listHead;
+    date nodeDate;
+} avlNode;
 
 typedef struct bucketEntry {
-    treeNode * ptr;
+    avlNode * ptr;
     char * string;
 } bucketEntry;
 

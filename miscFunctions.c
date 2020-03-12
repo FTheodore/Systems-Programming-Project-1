@@ -137,3 +137,28 @@ void getDate(date * dest, char * strDate) {
     else
         sscanf(strDate,"%d-%d-%d",&dest->day,&dest->month,&dest->year);
 }
+
+void copyDate(date * dest, date const * src) {
+    dest->day = src->day;
+    dest->month = src->month;
+    dest->year = src->year;
+}
+
+int cmpDates(date const * d1, date const * d2) {
+    if(d1->year > d2->year)
+        return 1;
+    else if(d1->year < d2->year)
+        return -1;
+
+    if(d1->month > d2->month)
+        return 1;
+    else if(d1->month < d2->month)
+        return -1;
+
+    if(d1->day > d2->day)
+        return 1;
+    else if(d1->day < d2->day)
+        return -1;
+
+    return 0;
+}

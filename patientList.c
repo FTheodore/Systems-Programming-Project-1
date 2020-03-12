@@ -2,13 +2,7 @@
 // Created by theo on 12/3/20.
 //
 
-#include "list.h"
-
-void copyDate(date * dest, date const * src) {
-    dest->day = src->day;
-    dest->month = src->month;
-    dest->year = src->year;
-}
+#include "patientList.h"
 
 patientRecord * initRecord(patientRecord buffer) { // initialize a patient record
     patientRecord * newRecord;
@@ -100,22 +94,20 @@ bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo) {
     return true;
 }
 
-void freeList(char type, listNode ** head) {
+void freeRecordsList(listNode ** head) {
     if(*head != NULL) {
-        freeList(type, &(*head)->next);
-        freeData(type, &(*head)->dataPointer);
+        freeRecordsList(&(*head)->next);
+        freePatientData(&(*head)->dataPointer);
         free(*head);
     }
 }
 
-void freeData(char type, void ** ptr) {
-    if(type == 'p') {
-        free( ((patientRecord *)(*ptr))->patientId );
-        free( ((patientRecord *)(*ptr))->diseaseId );
-        free( ((patientRecord *)(*ptr))->lastName );
-        free( ((patientRecord *)(*ptr))->firstName );
-        free( ((patientRecord *)(*ptr))->country );
-    }
+void freePatientData(void ** ptr) {
+    free( ((patientRecord *)(*ptr))->patientId );
+    free( ((patientRecord *)(*ptr))->diseaseId );
+    free( ((patientRecord *)(*ptr))->lastName );
+    free( ((patientRecord *)(*ptr))->firstName );
+    free( ((patientRecord *)(*ptr))->country );
 
     free(*ptr);
 }

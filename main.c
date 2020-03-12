@@ -1,6 +1,6 @@
 
 #include "miscFunctions.h"
-#include "list.h"
+#include "patientList.h"
 
 int main(int argc, char * argv[]) {
     char * recordsFileName;
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
 
 
     //free allocated space
-    freeList('p',&recordsListHead);
+    freeRecordsList(&recordsListHead);
     freeRecordBuffer(&recordBuffer);
     free(lineBuffer);
     free(recordsFileName);

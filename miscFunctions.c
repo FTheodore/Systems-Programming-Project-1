@@ -2,7 +2,7 @@
 // Created by theo on 11/3/20.
 //
 
-#include "mainFunctions.h"
+#include "miscFunctions.h"
 
 int openFile(FILE ** fp, char * fileName) {
     char *absolutePath;
@@ -61,4 +61,9 @@ int getArguments(int argc, char ** argv, int * diseaseHashSize, int * countryHas
     }
 
     return 0;
+}
+
+void removeNewLine(char * buffer) {
+    if(buffer[strlen(buffer) - 1] == '\n')
+        buffer[strlen(buffer) - 1] = '\0';
 }

@@ -1,5 +1,6 @@
 
-#include "mainFunctions.h"
+#include "miscFunctions.h"
+#include "patientList.h"
 
 int main(int argc, char * argv[]) {
     char * recordsFileName;
@@ -17,7 +18,17 @@ int main(int argc, char * argv[]) {
     if(retVal)
         exit(-1);
 
+    //read file with records
+    char * lineBuffer = NULL;
+    size_t lineBufferSize = 0;
+    while(getline(&lineBuffer, &lineBufferSize, fp) != -1) {
+        removeNewLine(lineBuffer);
+        printf("buffer content: %s (newln check)\n", lineBuffer);
+    }
 
+
+    //free allocated space
+    free(lineBuffer);
     free(recordsFileName);
     fclose(fp);
     exit(0);

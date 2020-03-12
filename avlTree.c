@@ -35,12 +35,38 @@ listNode * initListNodeOfAvl(listNode * patientRecord) {
     return newNode;
 }
 
+avlNode * getParentNode(avlNode *root,avlNode *node, bool * isLeft) {
+    if(root->lChild == node) {
+        *isLeft = true;
+        return root;
+    }
+    else if(root->rChild == node) {
+        *isLeft = false;
+        return root;
+    }
+
+    if(cmpDates(&root->nodeDate,&node->nodeDate) > 0)
+        return getParentNode(root->lChild,node,isLeft);
+    else
+        return getParentNode(root->rChild,node,isLeft);
+}
+
 void rotateLeft(avlNode **root,avlNode *node) {
     avlNode * rNode;
     rNode = node->rChild; //right child of the node
 
     if(*root == node)
         *root = rNode;
+    else { // find the parent of the node
+        bool isLeftChild;
+        avlNode * parentNode = getParentNode(*root,node,&isLeftChild);
+
+        // update the child of parent
+        if(isLeftChild)
+            parentNode->lChild = rNode;
+        else
+            parentNode->rChild = rNode;
+    }
 
     node->rChild = rNode->lChild;
     rNode->lChild = node;
@@ -52,6 +78,16 @@ void rotateRight(avlNode **root,avlNode *node) {
 
     if(*root == node)
         *root = lNode;
+    else { // find the parent of the node
+        bool isLeftChild;
+        avlNode * parentNode = getParentNode(*root,node,&isLeftChild);
+
+        // update the child of parent
+        if(isLeftChild)
+            parentNode->lChild = lNode;
+        else
+            parentNode->rChild = lNode;
+    }
 
     node->lChild = lNode->rChild;
     lNode->rChild = node;

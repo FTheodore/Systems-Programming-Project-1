@@ -7,10 +7,9 @@
 int openFile(FILE ** fp, char * fileName) {
     char *absolutePath;
     absolutePath = malloc(strlen(fileName) + strlen("../") + 1);
-    if(absolutePath == NULL) {
-        printf("Error occurred during malloc\n");
+    if(memErrCheck(absolutePath))
         return -1;
-    }
+
     strcpy(absolutePath,"../");
     strcat(absolutePath,fileName);
 
@@ -44,10 +43,8 @@ int getArguments(int argc, char ** argv, int * diseaseHashSize, int * countryHas
             i += 1;
         } else if (strcmp(argv[i], "-p") == 0) {
             *fileName = malloc(strlen(argv[i + 1]) + 1);
-            if(*fileName == NULL) {
-                printf("Error occurred during malloc\n");
+            if(memErrCheck(*fileName))
                 return -1;
-            }
             strcpy(*fileName, argv[i + 1]);
             ++argsRead;
             i += 1;
@@ -66,4 +63,77 @@ int getArguments(int argc, char ** argv, int * diseaseHashSize, int * countryHas
 void removeNewLine(char * buffer) {
     if(buffer[strlen(buffer) - 1] == '\n')
         buffer[strlen(buffer) - 1] = '\0';
+}
+
+int memErrCheck(void * ptr) {
+    if(ptr == NULL) {
+        printf("Error occurred during malloc\n");
+        return -1;
+    }
+
+    return 0;
+}
+
+int initRecordBuffer(patientRecord * buffer) {
+    buffer->lastName = malloc(MAX_STRING_LEN);
+    if(memErrCheck(buffer->lastName))
+        return -1;
+
+    buffer->firstName = malloc(MAX_STRING_LEN);
+    if(memErrCheck(buffer->firstName))
+        return -1;
+
+    buffer->patientId = malloc(MAX_STRING_LEN);
+    if(memErrCheck(buffer->patientId))
+        return -1;
+
+    buffer->country = malloc(MAX_STRING_LEN);
+    if(memErrCheck(buffer->country))
+        return -1;
+
+    buffer->diseaseId = malloc(MAX_STRING_LEN);
+    if(memErrCheck(buffer->diseaseId))
+        return -1;
+
+    return 0;
+}
+
+void freeRecordBuffer(patientRecord * buffer) {
+    free(buffer->diseaseId);
+    free(buffer->patientId);
+    free(buffer->country);
+    free(buffer->firstName);
+    free(buffer->lastName);
+}
+
+int readLine(char * line, patientRecord * buffer) {
+    char * entryDate, * exitDate;
+    entryDate = malloc(MAX_STRING_LEN);
+    if(memErrCheck(entryDate))
+        return -1;
+
+    exitDate = malloc(MAX_STRING_LEN);
+    if(memErrCheck(exitDate))
+        return -1;
+
+    sscanf(line,"%s %s %s %s %s %s %s",buffer->patientId,buffer->firstName,buffer->lastName,\
+    buffer->diseaseId,buffer->country,entryDate,exitDate);
+
+    // convert dates
+    getDate(&buffer->entryDate,entryDate);
+    getDate(&buffer->exitDate,exitDate);
+
+    free(entryDate);
+    free(exitDate);
+    return 0;
+}
+
+void getDate(date * dest, char * strDate) {
+    if(strcmp(strDate,"-") == 0) {
+        dest->day = 0;
+        dest->month = 0;
+        dest->year = 0;
+    }
+    else
+        sscanf(strDate,"%d-%d-%d",&dest->day,&dest->month,&dest->year);
 }

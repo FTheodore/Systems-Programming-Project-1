@@ -43,7 +43,7 @@ listNode * initBucketNode(int maxEntriesInBucket) {
 
     for (int i = 0; i < maxEntriesInBucket; ++i) {
         ((bucketNode *)newNode->dataPointer)->arrayOfEntries->string = NULL;
-        ((bucketNode *)newNode->dataPointer)->arrayOfEntries->ptr = NULL;
+        ((bucketNode *)newNode->dataPointer)->arrayOfEntries->avlPtr = NULL;
     }
 
     ((bucketNode *)newNode->dataPointer)->count = 0;
@@ -99,7 +99,8 @@ int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode
 
     for (int i = 0; i < node->count; ++i) {
         if(strcmp(newString,node->arrayOfEntries[i].string) == 0) {
-            retVal = insertToAvlTree(&node->arrayOfEntries[i].ptr,newDate,recordPointer,node->arrayOfEntries[i].ptr);
+            retVal = insertToAvlTree(&node->arrayOfEntries[i].avlPtr,newDate,\
+            recordPointer,node->arrayOfEntries[i].avlPtr);
             if(retVal)
                 return -1;
 
@@ -109,8 +110,8 @@ int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode
 
     // new entry must be created
     node->arrayOfEntries[node->count].string = strdup(newString);
-    retVal = insertToAvlTree(&node->arrayOfEntries[node->count].ptr,newDate,\
-    recordPointer,node->arrayOfEntries[node->count].ptr);
+    retVal = insertToAvlTree(&node->arrayOfEntries[node->count].avlPtr,newDate,\
+    recordPointer,node->arrayOfEntries[node->count].avlPtr);
     if(retVal)
         return -1;
 
@@ -147,4 +148,50 @@ int insertToHashTable(hashTable * hashT, char * newString, date * newDate, listN
 
         return insertToBucket(nodeToInsert->next->dataPointer,newString,newDate,recordPointer);
     }
+}
+
+void freeBucketList(listNode ** head) {
+    if(*head != NULL) {
+        freeBucketList(&(*head)->next);
+
+        for (int i = 0; i < ((bucketNode *)(*head)->dataPointer)->count; ++i) {
+            freeAvlTree(&((bucketNode *)(*head)->dataPointer)->arrayOfEntries[i].avlPtr);
+            free(((bucketNode *)(*head)->dataPointer)->arrayOfEntries[i].string);
+        }
+
+        free(((bucketNode *)(*head)->dataPointer)->arrayOfEntries);
+        free((*head)->dataPointer);
+        free(*head);
+    }
+}
+
+void freeHashTable(hashTable ** hashT) {
+    for (int i = 0; i < (*hashT)->tableSize; ++i) {
+        if((*hashT)->table[i] != NULL)
+            freeBucketList(&(*hashT)->table[i]);
+    }
+
+    free(*hashT);
+}
+
+void printHashList(listNode * head) {
+    if(head != NULL){
+        for (int i = 0; i < ((bucketNode *)head->dataPointer)->count; ++i) {
+            printf("$$$  %s  $$$\n",((bucketNode *)head->dataPointer)->arrayOfEntries[i].string);
+            printAvlTree(((bucketNode *)head->dataPointer)->arrayOfEntries[i].avlPtr);
+        }
+
+        printHashList(head->next);
+    }
+}
+
+void printHashTable(hashTable * hashT) {
+    printf("<<<< PRINTING HASH TABLE >>>>\n");
+    for (int i = 0; i < hashT->tableSize; ++i) {
+        if(hashT->table[i] != NULL) {
+            printf("\t - IN TABLE INDEX %d -\n",i);
+            printHashList(hashT->table[i]);
+        }
+    }
+    printf("\n<<<<< EOT >>>>>>\n\n");
 }

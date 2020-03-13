@@ -41,7 +41,7 @@ typedef struct avlNode {
 } avlNode;
 
 typedef struct bucketEntry {
-    avlNode * ptr;
+    avlNode * avlPtr;
     char * string;
 } bucketEntry;
 

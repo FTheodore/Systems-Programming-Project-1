@@ -163,3 +163,13 @@ int cmpDates(date const * d1, date const * d2) {
 
     return 0;
 }
+
+void printRecord(listNode * patientRec) {
+    patientRecord * dataPtr = patientRec->dataPointer;
+
+    printf("Patient id: %s\n\tName: %s %s\n\tDisease id: %s\n\tCountry: %s\n",\
+        dataPtr->patientId,dataPtr->firstName,dataPtr->lastName,dataPtr->diseaseId,dataPtr->country);
+    printf("\tEntry date: %d-%d-%d\n",dataPtr->entryDate.day,dataPtr->entryDate.month,dataPtr->entryDate.year);
+    printf("\tExit date: %d-%d-%d\n",dataPtr->exitDate.day,dataPtr->exitDate.month,dataPtr->exitDate.year);
+    printf("\t~~~~~~~~~~~~~~~~\n\n");
+}

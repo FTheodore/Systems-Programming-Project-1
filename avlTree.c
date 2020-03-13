@@ -259,3 +259,22 @@ void freeAvlTree(avlNode ** root) {
         free(*root);
     }
 }
+
+void printAvlList(listNode * head) {
+    if(head != NULL){
+        printRecord(head->dataPointer);
+        printAvlList(head->next);
+    }
+}
+
+void printAvlTree(avlNode * root) {
+    if(root != NULL) {
+        printAvlTree(root->lChild);
+
+        printf("\t*** NODE'S DATE: %d-%d-%d ***\n\t     | | |\n\t     v v v\n",\
+        root->nodeDate.day,root->nodeDate.month,root->nodeDate.year);
+        printAvlList(root->listHead);
+
+        printAvlTree(root->rChild);
+    }
+}

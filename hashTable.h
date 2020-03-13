@@ -17,5 +17,9 @@ int hashFunction(char const * string, int tableSize);
 int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode * recordPointer);
 bool bucketEntryExists(char const * newString, listNode * head,listNode ** retAddress, int maxEntries, bool * noSpace);
 int insertToHashTable(hashTable * hashT, char * newString, date * newDate, listNode * recordPointer);
+void freeBucketList(listNode ** head);
+void freeHashTable(hashTable ** hashT);
+void printHashList(listNode * head);
+void printHashTable(hashTable * hashT);
 
 #endif //SYSPRO_1_HASHTABLE_H

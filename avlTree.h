@@ -20,5 +20,7 @@ void rotateRight(avlNode **root,avlNode *node);
 void updateHeight(avlNode * node);
 void freeAvlList(listNode ** head);
 void freeAvlTree(avlNode ** root);
+void printAvlList(listNode * head);
+void printAvlTree(avlNode * root);
 
 #endif //SYSPRO_1_AVLTREE_H

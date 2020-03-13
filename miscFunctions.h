@@ -26,5 +26,6 @@ void getDate(date * dest, char * strDate);
 int readLine(char * line, patientRecord * buffer);
 void copyDate(date * dest, date const * src);
 int cmpDates(date const * d1, date const * d2);
+void printRecord(listNode * patientRec);
 
 #endif //SYSPRO_1_MISCFUNCTIONS_H

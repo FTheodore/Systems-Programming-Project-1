@@ -49,13 +49,16 @@ int main(int argc, char * argv[]) {
         }
 
         // insert record pointer to tree
-        retVal = insertToAvlTree(&avlRoot, &recordBuffer.entryDate, recordPointer, avlRoot);
+        retVal = insertToAvlTree(&avlRoot, &recordBuffer.entryDate, recordPointer, &avlRoot);
         if(retVal)
             exit(-1);
     }
 
-    printf("\tPRINTING LIST ::\n");
-    printRecordsList(recordsListHead);
+//    printf("\tPRINTING LIST ::\n");
+//    printRecordsList(recordsListHead);
+//    printf("///////////////////////////\n\n");
+    printf("PRINTING TREE ::\n");
+    printAvlTree(avlRoot);
 
     //free allocated space
     freeAvlTree(&avlRoot);

@@ -100,7 +100,7 @@ int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode
     for (int i = 0; i < node->count; ++i) {
         if(strcmp(newString,node->arrayOfEntries[i].string) == 0) {
             retVal = insertToAvlTree(&node->arrayOfEntries[i].avlPtr,newDate,\
-            recordPointer,node->arrayOfEntries[i].avlPtr);
+            recordPointer,&node->arrayOfEntries[i].avlPtr);
             if(retVal)
                 return -1;
 
@@ -111,7 +111,7 @@ int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode
     // new entry must be created
     node->arrayOfEntries[node->count].string = strdup(newString);
     retVal = insertToAvlTree(&node->arrayOfEntries[node->count].avlPtr,newDate,\
-    recordPointer,node->arrayOfEntries[node->count].avlPtr);
+    recordPointer,&node->arrayOfEntries[node->count].avlPtr);
     if(retVal)
         return -1;
 

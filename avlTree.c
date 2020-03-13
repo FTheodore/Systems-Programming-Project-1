@@ -134,7 +134,7 @@ int insertToAvlList(listNode ** listHead, listNode * patientRecord) {
     }
 }
 
-int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, avlNode * treeRoot) {
+int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, avlNode ** treeRoot) {
     // insert a new node to the avl tree and rebalance it if needed
     if(*node == NULL) { // tree is empty
         *node = initAvlNode(newDate);
@@ -152,7 +152,7 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
             if((*node)->rChild == NULL)
                 return -1;
 
-            updateHeight(treeRoot); // update height for all nodes
+            updateHeight(*treeRoot); // update height for all nodes
             return insertToAvlList(&(*node)->rChild->listHead,patientRecord);
         }
         else { // insert to right subtree and rebalance if needed
@@ -165,15 +165,15 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
             if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
                 if(leftSubtreeBigger((*node)->rChild)) { // RL case
                     printf("RL\n");
-                    rotateRight(&treeRoot,(*node)->rChild);
-                    rotateLeft(&treeRoot,*node);
+                    rotateRight(treeRoot,(*node)->rChild);
+                    rotateLeft(treeRoot,*node);
                 }
                 else { // RR case
                     printf("RR\n");
-                    rotateLeft(&treeRoot,*node);
+                    rotateLeft(treeRoot,*node);
                 }
 
-                updateHeight(treeRoot); // tree has been modified
+                updateHeight(*treeRoot); // tree has been modified
             }
             return 0;
         }
@@ -184,7 +184,7 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
             if((*node)->lChild == NULL)
                 return -1;
 
-            updateHeight(treeRoot); // update height for all nodes
+            updateHeight(*treeRoot); // update height for all nodes
             return insertToAvlList(&(*node)->lChild->listHead,patientRecord);
         }
         else { // insert to left subtree and rebalance if needed
@@ -197,15 +197,15 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
             if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
                 if(!leftSubtreeBigger((*node)->lChild)) { // LR case
                     printf("LR\n");
-                    rotateLeft(&treeRoot,(*node)->lChild);
-                    rotateRight(&treeRoot,*node);
+                    rotateLeft(treeRoot,(*node)->lChild);
+                    rotateRight(treeRoot,*node);
                 }
                 else { // LL case
                     printf("LL\n");
-                    rotateRight(&treeRoot,*node);
+                    rotateRight(treeRoot,*node);
                 }
 
-                updateHeight(treeRoot); // tree has been modified
+                updateHeight(*treeRoot); // tree has been modified
             }
             return 0;
         }

@@ -66,13 +66,14 @@ bool recordExists(char const * patientId, listNode * head, listNode ** retAddres
     }
 }
 
-bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo) {
+bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo, listNode ** retAddress) {
     if(*head == NULL) { // if list is empty insert the new node
         *head = initPatientListNode(buffer);
         if(*head == NULL) {
             *errNo = -1;
             return false;
         }
+        *retAddress = *head;
         return true;
     }
 
@@ -91,6 +92,7 @@ bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo) {
     }
 
     lastNode->next = newNode; // insert the new record at the end of the list
+    *retAddress = newNode;
     return true;
 }
 
@@ -110,4 +112,18 @@ void freePatientData(void ** ptr) {
     free( ((patientRecord *)(*ptr))->country );
 
     free(*ptr);
+}
+
+void printRecordsList(listNode * head) {
+    if(head != NULL) {
+        patientRecord * dataPtr = head->dataPointer;
+
+        printf("Patient id: %s\n\tName: %s %s\n\tDisease id: %s\n\tCountry: %s\n",\
+        dataPtr->patientId,dataPtr->firstName,dataPtr->lastName,dataPtr->diseaseId,dataPtr->country);
+        printf("\tEntry date: %d %d %d\n",dataPtr->entryDate.day,dataPtr->entryDate.month,dataPtr->entryDate.year);
+        printf("\tExit date: %d %d %d\n",dataPtr->exitDate.day,dataPtr->exitDate.month,dataPtr->exitDate.year);
+        printf("\t~~~~~~~~~~~~~~~~\n\n");
+
+        printRecordsList(head->next);
+    }
 }

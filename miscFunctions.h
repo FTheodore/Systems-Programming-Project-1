@@ -14,7 +14,10 @@
 
 
 int openFile(FILE ** fp, char * fileName);
-int getArguments(int argc, char ** argv, int * diseaseHashSize, int * countryHashSize, int * bucketSize, char ** fileName);
+
+int getArguments(int argc, char ** argv, int * diseaseHashSize,\
+int * countryHashSize, int * bucketSize, char ** fileName);
+
 void removeNewLine(char * buffer);
 int memErrCheck(void * pointr);
 int initRecordBuffer(patientRecord * buffer);

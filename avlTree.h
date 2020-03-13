@@ -5,7 +5,7 @@
 #ifndef SYSPRO_1_AVLTREE_H
 #define SYSPRO_1_AVLTREE_H
 
-#include "stdbool.h"
+#include <stdbool.h>
 #include "miscFunctions.h"
 
 avlNode * initAvlNode(date const * nodeDate);

@@ -164,10 +164,12 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
 
             if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
                 if(leftSubtreeBigger((*node)->rChild)) { // RL case
+                    printf("RL\n");
                     rotateRight(&treeRoot,(*node)->rChild);
                     rotateLeft(&treeRoot,*node);
                 }
                 else { // RR case
+                    printf("RR\n");
                     rotateLeft(&treeRoot,*node);
                 }
 
@@ -194,10 +196,12 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
 
             if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
                 if(!leftSubtreeBigger((*node)->lChild)) { // LR case
+                    printf("LR\n");
                     rotateLeft(&treeRoot,(*node)->lChild);
                     rotateRight(&treeRoot,*node);
                 }
                 else { // LL case
+                    printf("LL\n");
                     rotateRight(&treeRoot,*node);
                 }
 

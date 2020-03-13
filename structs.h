@@ -27,8 +27,9 @@ typedef struct listNode {
 } listNode;
 
 typedef struct hashTable {
-    listNode * array;
-    int arraySize;
+    listNode ** table;
+    int tableSize;
+    int maxEntriesInBucket;
 } hashTable;
 
 typedef struct avlNode {
@@ -43,6 +44,11 @@ typedef struct bucketEntry {
     avlNode * ptr;
     char * string;
 } bucketEntry;
+
+typedef struct bucketNode {
+    bucketEntry * arrayOfEntries;
+    int count;
+} bucketNode;
 
 
 #endif //SYSPRO_1_STRUCTS_H

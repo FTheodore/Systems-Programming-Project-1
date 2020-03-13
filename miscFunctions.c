@@ -21,7 +21,8 @@ int openFile(FILE ** fp, char * fileName) {
     return 0;
 }
 
-int getArguments(int argc, char ** argv, int * diseaseHashSize, int * countryHashSize, int * bucketSize, char ** fileName) {
+int getArguments(int argc, char ** argv, int * diseaseHashSize,\
+int * countryHashSize, int * bucketSize, char ** fileName) {
     if(argc != 9) {
         printf("Wrong input\n");
         return -1;

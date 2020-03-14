@@ -136,79 +136,62 @@ int insertToAvlList(listNode ** listHead, listNode * patientRecord) {
 
 int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, avlNode ** treeRoot) {
     // insert a new node to the avl tree and rebalance it if needed
-    if(*node == NULL) { // tree is empty
+    if(*node == NULL) { // reached end
         *node = initAvlNode(newDate);
         if(*node == NULL)
             return -1;
 
+        updateHeight(*treeRoot);
         return insertToAvlList(&(*node)->listHead,patientRecord);
     }
     else if(cmpDates(newDate,&(*node)->nodeDate) == 0) { // a node with the same date already exists
         return insertToAvlList(&(*node)->listHead,patientRecord);
     }
     else if(cmpDates(newDate,&(*node)->nodeDate) > 0) { // new entry should go to the right subtree
-        if((*node)->rChild == NULL) { // reached end of tree
-            (*node)->rChild = initAvlNode(newDate);
-            if((*node)->rChild == NULL)
-                return -1;
+        // insert to right subtree and rebalance if needed
+        int retVal = insertToAvlTree(&(*node)->rChild,newDate,patientRecord,treeRoot);
+        if(retVal)
+            return -1;
 
-            updateHeight(*treeRoot); // update height for all nodes
-            return insertToAvlList(&(*node)->rChild->listHead,patientRecord);
-        }
-        else { // insert to right subtree and rebalance if needed
-            int retVal = insertToAvlTree(&(*node)->rChild,newDate,patientRecord,treeRoot);
-            if(retVal)
-                return -1;
+        int heightDiff = getSubtreeHeightDiff(*node);
 
-            int heightDiff = getSubtreeHeightDiff(*node);
-
-            if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
-                if(leftSubtreeBigger((*node)->rChild)) { // RL case
-                    printf("RL\n");
-                    rotateRight(treeRoot,(*node)->rChild);
-                    rotateLeft(treeRoot,*node);
-                }
-                else { // RR case
-                    printf("RR\n");
-                    rotateLeft(treeRoot,*node);
-                }
-
-                updateHeight(*treeRoot); // tree has been modified
+        if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
+            if(leftSubtreeBigger((*node)->rChild)) { // RL case
+                printf("RL\n");
+                rotateRight(treeRoot,(*node)->rChild);
+                rotateLeft(treeRoot,*node);
             }
-            return 0;
+            else { // RR case
+                printf("RR\n");
+                rotateLeft(treeRoot,*node);
+            }
+
+            updateHeight(*treeRoot); // tree has been modified
         }
+        return 0;
     }
     else if(cmpDates(newDate,&(*node)->nodeDate) < 0) { // new entry should go to the left subtree
-        if((*node)->lChild == NULL) { // reached end of tree
-            (*node)->lChild = initAvlNode(newDate);
-            if((*node)->lChild == NULL)
-                return -1;
+        // insert to left subtree and rebalance if needed
+        int retVal = insertToAvlTree(&(*node)->lChild,newDate,patientRecord,treeRoot);
+        if(retVal)
+            return -1;
 
-            updateHeight(*treeRoot); // update height for all nodes
-            return insertToAvlList(&(*node)->lChild->listHead,patientRecord);
-        }
-        else { // insert to left subtree and rebalance if needed
-            int retVal = insertToAvlTree(&(*node)->lChild,newDate,patientRecord,treeRoot);
-            if(retVal)
-                return -1;
+        int heightDiff = getSubtreeHeightDiff(*node);
 
-            int heightDiff = getSubtreeHeightDiff(*node);
-
-            if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
-                if(!leftSubtreeBigger((*node)->lChild)) { // LR case
-                    printf("LR\n");
-                    rotateLeft(treeRoot,(*node)->lChild);
-                    rotateRight(treeRoot,*node);
-                }
-                else { // LL case
-                    printf("LL\n");
-                    rotateRight(treeRoot,*node);
-                }
-
-                updateHeight(*treeRoot); // tree has been modified
+        if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
+            if(!leftSubtreeBigger((*node)->lChild)) { // LR case
+                printf("LR\n");
+                rotateLeft(treeRoot,(*node)->lChild);
+                rotateRight(treeRoot,*node);
             }
-            return 0;
+            else { // LL case
+                printf("LL\n");
+                rotateRight(treeRoot,*node);
+            }
+
+            updateHeight(*treeRoot); // tree has been modified
         }
+        return 0;
     }
     return 0;
 

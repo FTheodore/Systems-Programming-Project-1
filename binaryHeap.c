@@ -21,21 +21,6 @@ heapNode * initHeapNode(char * string) {
     return newNode;
 }
 
-int insertHeapNode(heapNode ** currentNode, char * newString, heapNode ** heapRoot) {
-    if(*currentNode == NULL) { // reached end of heap
-        *currentNode = initHeapNode(newString);
-        if(*currentNode == NULL)
-            return -1;
-        updateHeapHeight(*heapRoot);
-        return 0;
-    }
-    else if(getHeapSubtreeHeightDiff(*currentNode) > 0) // left subtree is bigger so insert to right subtree
-        return insertHeapNode(&(*currentNode)->rChild, newString, heapRoot);
-    else
-        return insertHeapNode(&(*currentNode)->lChild, newString, heapRoot);
-
-}
-
 void findUpdateHeapNode(heapNode ** currentNode, char * newString, bool * foundNode) {
     // this function will check if a node with same string already exists and update it's counter
     if(*currentNode == NULL) { // reached end of heap
@@ -92,6 +77,21 @@ int getHeapSubtreeHeightDiff(heapNode * node) {
     return node->lChild->height - node->rChild->height;
 }
 
+int insertHeapNode(heapNode ** currentNode, char * newString, heapNode ** heapRoot) {
+    if(*currentNode == NULL) { // reached end of heap
+        *currentNode = initHeapNode(newString);
+        if(*currentNode == NULL)
+            return -1;
+        updateHeapHeight(*heapRoot);
+        return 0;
+    }
+    else if(getHeapSubtreeHeightDiff(*currentNode) > 0) // left subtree is bigger so insert to right subtree
+        return insertHeapNode(&(*currentNode)->rChild, newString, heapRoot);
+    else
+        return insertHeapNode(&(*currentNode)->lChild, newString, heapRoot);
+
+}
+
 int insertAvlListToHeap(listNode * head, heapNode ** heapRoot, char type) {
     if(head != NULL) {
         bool foundNode = false;
@@ -139,4 +139,170 @@ int buildHeap(avlNode * avlRoot, heapNode ** heapRoot, char type) {
     }
     else
         return 0;
+}
+
+void getParentNode(heapNode * root,heapNode * node, bool * isLeft, heapNode ** retAddress) {
+    // find the parent of a node
+    if(root == NULL)
+        return;
+    else if(root->lChild == node) {
+        *isLeft = true;
+        *retAddress = root;
+        return;
+    }
+    else if(root->rChild == node) {
+        *isLeft = false;
+        *retAddress = root;
+        return;
+    }
+
+    getParentNode(root->lChild,node,isLeft,retAddress);
+    getParentNode(root->rChild,node,isLeft,retAddress);
+}
+
+void rightChildSwap(heapNode ** root, heapNode * node) {
+    heapNode * rNode;
+    rNode = node->rChild;
+
+    if(*root == node)
+        *root = rNode;
+    else { // find the parent of the node
+        bool isLeftChild;
+        heapNode * parentNode;
+        getParentNode(*root,node,&isLeftChild,&parentNode);
+
+        // update the child of parent
+        if(isLeftChild)
+            parentNode->lChild = rNode;
+        else
+            parentNode->rChild = rNode;
+    }
+
+    //swap right subtrees
+    node->rChild = rNode->rChild;
+    rNode->rChild = node;
+
+    //swap left subtrees
+    heapNode * tmp;
+    tmp = node->lChild;
+    node->lChild = rNode->lChild;
+    rNode->lChild = tmp;
+}
+
+void leftChildSwap(heapNode ** root, heapNode * node) {
+    heapNode * lNode;
+    lNode = node->lChild;
+
+    if(*root == node)
+        *root = lNode;
+    else { // find the parent of the node
+        bool isLeftChild;
+        heapNode * parentNode;
+        getParentNode(*root,node,&isLeftChild,&parentNode);
+
+        // update the child of parent
+        if(isLeftChild)
+            parentNode->lChild = lNode;
+        else
+            parentNode->rChild = lNode;
+    }
+
+    //swap left subtrees
+    node->lChild = lNode->lChild;
+    lNode->lChild = node;
+
+    //swap right subtrees
+    heapNode * tmp;
+    tmp = node->rChild;
+    node->rChild = lNode->rChild;
+    lNode->rChild = tmp;
+}
+
+void heapify(heapNode ** root, heapNode * node) { // fix max heap in a subtree
+    int maxCount = node->count;
+
+    if(node->lChild != NULL && node->lChild->count > maxCount)
+        maxCount = node->lChild->count;
+
+    if(node->rChild != NULL && node->rChild->count > maxCount)
+        maxCount = node->rChild->count;
+
+    if(maxCount == node->count) // max heap property not violated
+        return;
+    else if(node->lChild != NULL && node->lChild->count == maxCount) // left child bigger than root
+        leftChildSwap(root,node);
+    else // right child bigger
+        rightChildSwap(root,node);
+
+    heapify(root,node); // check if subtree max heap property is violated
+}
+
+void buildMaxHeap(heapNode * node, heapNode ** root) {
+    if(node != NULL) {
+        buildMaxHeap(node->lChild, root);
+        buildMaxHeap(node->rChild, root);
+        heapify(root, node);
+    }
+}
+
+void swapRoot(heapNode * node, heapNode ** root) { // reach end of heap and make that node the new root
+    if(node->rChild != NULL)
+        swapRoot(node->rChild, root);
+    else if(node->lChild != NULL)
+        swapRoot(node->lChild, root);
+    else { // reached end
+        bool isLeftChild;
+        heapNode * parentNode;
+        getParentNode(*root, node, &isLeftChild, &parentNode);
+
+        if(isLeftChild)
+            parentNode->lChild = NULL;
+        else
+            parentNode->rChild = NULL;
+
+        node->lChild = (*root)->lChild;
+        node->rChild = (*root)->rChild;
+        *root = node;
+    }
+
+}
+
+void freeHeap(heapNode ** root) {
+    if(*root != NULL) {
+        freeHeap(&(*root)->lChild);
+        freeHeap(&(*root)->rChild);
+
+        free((*root)->string);
+        free(*root);
+    }
+}
+
+int getTopValues(int numOfValues, avlNode * avlRoot, char type) {
+    heapNode * heapRoot = NULL;
+    //first build the heap
+    int retVal;
+    retVal = buildHeap(avlRoot, &heapRoot, type);
+    if(retVal)
+        return -1;
+
+    buildMaxHeap(heapRoot, &heapRoot); // sort it
+
+    for (int i = 0; i < numOfValues; ++i) {
+        heapNode * nodeOut = heapRoot; // get the node with the highest value
+
+        printf("%s : %d\n",nodeOut->string, nodeOut->count);
+
+
+        if(nodeOut->lChild == NULL && nodeOut->rChild == NULL) // last node
+            break;
+
+        swapRoot(heapRoot, &heapRoot); // replace root with leaf node
+        heapify(&heapRoot, heapRoot); // fix max heap
+
+        free(nodeOut->string);
+        free(nodeOut);
+    }
+
+    freeHeap(&heapRoot);
+    return 0;
 }

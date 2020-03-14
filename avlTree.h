@@ -10,14 +10,14 @@
 
 avlNode * initAvlNode(date const * nodeDate);
 listNode * initListNodeOfAvl(listNode * patientRecord);
-int getSubtreeHeightDiff(avlNode * node);
+//int getSubtreeHeightDiff(avlNode * node);
 bool leftSubtreeBigger(avlNode * node);
 int insertToAvlList(listNode ** listHead, listNode * patientRecord);
 int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, avlNode ** treeRoot);
-avlNode * getParentNode(avlNode *root,avlNode *node, bool * isLeft);
+//avlNode * getParentNode(avlNode *root,avlNode *node, bool * isLeft);
 void rotateLeft(avlNode **root,avlNode *node);
 void rotateRight(avlNode **root,avlNode *node);
-void updateHeight(avlNode * node);
+//void updateHeight(avlNode * node);
 void freeAvlList(listNode ** head);
 void freeAvlTree(avlNode ** root);
 void printAvlList(listNode * head);

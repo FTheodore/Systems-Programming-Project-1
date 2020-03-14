@@ -99,17 +99,17 @@ bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo, list
 void freeRecordsList(listNode ** head) {
     if(*head != NULL) {
         freeRecordsList(&(*head)->next);
-        freePatientData(&(*head)->dataPointer);
+        freePatientData((patientRecord **)&(*head)->dataPointer);
         free(*head);
     }
 }
 
-void freePatientData(void ** ptr) {
-    free( ((patientRecord *)(*ptr))->patientId );
-    free( ((patientRecord *)(*ptr))->diseaseId );
-    free( ((patientRecord *)(*ptr))->lastName );
-    free( ((patientRecord *)(*ptr))->firstName );
-    free( ((patientRecord *)(*ptr))->country );
+void freePatientData(patientRecord ** ptr) {
+    free( (*ptr)->patientId );
+    free( (*ptr)->diseaseId );
+    free( (*ptr)->lastName );
+    free( (*ptr)->firstName );
+    free( (*ptr)->country );
 
     free(*ptr);
 }

@@ -110,6 +110,9 @@ int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode
 
     // new entry must be created
     node->arrayOfEntries[node->count].string = strdup(newString);
+    if(memErrCheck(node->arrayOfEntries[node->count].string))
+        return -1;
+
     retVal = insertToAvlTree(&node->arrayOfEntries[node->count].avlPtr,newDate,\
     recordPointer,&node->arrayOfEntries[node->count].avlPtr);
     if(retVal)
@@ -176,10 +179,12 @@ void freeHashTable(hashTable ** hashT) {
 
 void printHashList(listNode * head) {
     if(head != NULL){
+        printf("(start of bucket node)\n");
         for (int i = 0; i < ((bucketNode *)head->dataPointer)->count; ++i) {
             printf("$$$  %s  $$$\n",((bucketNode *)head->dataPointer)->arrayOfEntries[i].string);
             printAvlTree(((bucketNode *)head->dataPointer)->arrayOfEntries[i].avlPtr);
         }
+        printf("(end of bucket node)\n");
 
         printHashList(head->next);
     }

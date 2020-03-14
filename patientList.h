@@ -14,7 +14,7 @@ patientRecord * initRecord(patientRecord buffer);
 listNode * initPatientListNode(patientRecord buffer);
 bool recordExists(char const * patientId, listNode * head, listNode ** retAddress);
 bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo, listNode ** retAddress);
-void freePatientData(void ** ptr);
+void freePatientData(patientRecord ** ptr);
 void freeRecordsList(listNode ** head);
 void printRecordsList(listNode * head);
 

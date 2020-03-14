@@ -50,5 +50,13 @@ typedef struct bucketNode {
     int count;
 } bucketNode;
 
+typedef struct heapNode {
+    struct heapNode * lChild;
+    struct heapNode * rChild;
+    int height;
+    int count;
+    char * string;
+} heapNode;
+
 
 #endif //SYSPRO_1_STRUCTS_H

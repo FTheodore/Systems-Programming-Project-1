@@ -141,7 +141,7 @@ int buildHeap(avlNode * avlRoot, heapNode ** heapRoot, char type) {
         return 0;
 }
 
-void getParentNode(heapNode * root,heapNode * node, bool * isLeft, heapNode ** retAddress) {
+void getHeapParentNode(heapNode * root,heapNode * node, bool * isLeft, heapNode ** retAddress) {
     // find the parent of a node
     if(root == NULL)
         return;
@@ -156,8 +156,8 @@ void getParentNode(heapNode * root,heapNode * node, bool * isLeft, heapNode ** r
         return;
     }
 
-    getParentNode(root->lChild,node,isLeft,retAddress);
-    getParentNode(root->rChild,node,isLeft,retAddress);
+    getHeapParentNode(root->lChild,node,isLeft,retAddress);
+    getHeapParentNode(root->rChild,node,isLeft,retAddress);
 }
 
 void rightChildSwap(heapNode ** root, heapNode * node) {
@@ -169,7 +169,7 @@ void rightChildSwap(heapNode ** root, heapNode * node) {
     else { // find the parent of the node
         bool isLeftChild;
         heapNode * parentNode;
-        getParentNode(*root,node,&isLeftChild,&parentNode);
+        getHeapParentNode(*root,node,&isLeftChild,&parentNode);
 
         // update the child of parent
         if(isLeftChild)
@@ -198,7 +198,7 @@ void leftChildSwap(heapNode ** root, heapNode * node) {
     else { // find the parent of the node
         bool isLeftChild;
         heapNode * parentNode;
-        getParentNode(*root,node,&isLeftChild,&parentNode);
+        getHeapParentNode(*root,node,&isLeftChild,&parentNode);
 
         // update the child of parent
         if(isLeftChild)
@@ -253,7 +253,7 @@ void swapRoot(heapNode * node, heapNode ** root) { // reach end of heap and make
     else { // reached end
         bool isLeftChild;
         heapNode * parentNode;
-        getParentNode(*root, node, &isLeftChild, &parentNode);
+        getHeapParentNode(*root, node, &isLeftChild, &parentNode);
 
         if(isLeftChild)
             parentNode->lChild = NULL;
@@ -290,7 +290,7 @@ int getTopValues(int numOfValues, avlNode * avlRoot, char type) {
     for (int i = 0; i < numOfValues; ++i) {
         heapNode * nodeOut = heapRoot; // get the node with the highest value
 
-        printf("%s : %d\n",nodeOut->string, nodeOut->count);
+        printf("%d) %s: %d\n", i + 1, nodeOut->string, nodeOut->count);
 
 
         if(nodeOut->lChild == NULL && nodeOut->rChild == NULL) // last node

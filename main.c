@@ -1,6 +1,7 @@
 
 #include "patientList.h"
 #include "avlTree.h"
+#include "hashTable.h"
 
 int main(int argc, char * argv[]) {
     char * recordsFileName;
@@ -10,6 +11,10 @@ int main(int argc, char * argv[]) {
 
     listNode * recordsListHead = NULL;
     avlNode * avlRoot = NULL;
+    hashTable * diseaseHashTbl = NULL;
+    hashTable * countryHashTbl = NULL;
+
+
 
     //read the command line arguments
     retVal = getArguments(argc, argv, &diseaseHashSize, &countryHashSize, &bucketSize, &recordsFileName);
@@ -21,7 +26,10 @@ int main(int argc, char * argv[]) {
     if(retVal)
         exit(-1);
 
-    patientRecord recordBuffer;
+    diseaseHashTbl = initHashTable(diseaseHashSize, bucketSize);
+    countryHashTbl = initHashTable(countryHashSize, bucketSize);
+
+    patientRecord recordBuffer; // a buffer to store record read from each line
     retVal = initRecordBuffer(&recordBuffer);
     if(retVal)
         exit(-1);
@@ -48,19 +56,28 @@ int main(int argc, char * argv[]) {
             continue;
         }
 
-        // insert record pointer to tree
-        retVal = insertToAvlTree(&avlRoot, &recordBuffer.entryDate, recordPointer, &avlRoot);
+        patientRecord * patientData = recordPointer->dataPointer;
+        retVal = insertToHashTable(diseaseHashTbl, patientData->diseaseId, &patientData->entryDate, recordPointer);
         if(retVal)
             exit(-1);
+
+        retVal = insertToHashTable(countryHashTbl, patientData->country, &patientData->entryDate, recordPointer);
+        if(retVal)
+            exit(-1);
+
+        // insert record pointer to tree
+//        retVal = insertToAvlTree(&avlRoot, &recordBuffer.entryDate, recordPointer, &avlRoot);
+//        if(retVal)
+//            exit(-1);
     }
 
-//    printf("\tPRINTING LIST ::\n");
-//    printRecordsList(recordsListHead);
-//    printf("///////////////////////////\n\n");
-    printf("PRINTING TREE ::\n");
-    printAvlTree(avlRoot);
+    printHashTable(diseaseHashTbl);
+
+    printHashTable(countryHashTbl);
 
     //free allocated space
+    freeHashTable(&diseaseHashTbl);
+    freeHashTable(&countryHashTbl);
     freeAvlTree(&avlRoot);
     freeRecordsList(&recordsListHead);
     freeRecordBuffer(&recordBuffer);

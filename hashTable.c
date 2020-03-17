@@ -200,3 +200,108 @@ void printHashTable(hashTable * hashT) {
     }
     printf("\n<<<<< EOT >>>>>>\n\n");
 }
+
+void countHashListEntries(listNode * head, date start, date end, bool datesGiven) {
+    if(head != NULL) {
+        bucketNode * nodeData = head->dataPointer;
+        for (int i = 0; i < nodeData->count; ++i) {
+            int count = 0;
+            countAvlTreeEntries(nodeData->arrayOfEntries[i].avlPtr,&count,datesGiven,start,end);
+            printf("Disease: %s , Number of cases: %d\n",nodeData->arrayOfEntries[i].string,count);
+        }
+        countHashListEntries(head->next,start,end,datesGiven);
+    }
+}
+
+void countHashListSick(listNode * head) {
+    if(head != NULL) {
+        bucketNode * nodeData = head->dataPointer;
+        for (int i = 0; i < nodeData->count; ++i) {
+            int count = 0;
+            countAvlTreePatients(nodeData->arrayOfEntries[i].avlPtr,&count);
+            printf("Disease: %s , Number of sick people: %d\n",nodeData->arrayOfEntries[i].string,count);
+        }
+        countHashListSick(head->next);
+    }
+}
+
+void findCountForDisease(listNode * head, char * virusName, bool countryGiven, char *country, date start, date end) {
+    if(head != NULL) {
+        bucketNode * nodeData = head->dataPointer;
+        for (int i = 0; i < nodeData->count; ++i) {
+            if(strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
+                int count = 0;
+                countAvlTreeEntriesByCountry(nodeData->arrayOfEntries[i].avlPtr,&count,countryGiven,country,start,end);
+                printf("Number of cases for virus %s are %d\n",nodeData->arrayOfEntries[i].string,count);
+                return;
+            }
+        }
+        findCountForDisease(head->next,virusName,countryGiven,country,start,end);
+    }
+    else
+        printf("No cases exist for this disease\n");
+}
+
+void findPatientsForDisease(listNode * head, char * virusName) {
+    if(head != NULL) {
+        bucketNode * nodeData = head->dataPointer;
+        for (int i = 0; i < nodeData->count; ++i) {
+            if(strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
+                int count = 0;
+                countAvlTreePatients(nodeData->arrayOfEntries[i].avlPtr,&count);
+                printf("Number of sick people for virus %s are %d\n",nodeData->arrayOfEntries[i].string,count);
+                return;
+            }
+        }
+        findPatientsForDisease(head->next,virusName);
+    }
+    else
+        printf("No cases exist for this disease\n");
+}
+
+int findForHeap(listNode * head, char * string,int numOfValues,char type,bool datesGiven,date start,date end) {
+    if(head != NULL) {
+        bucketNode * nodeData = head->dataPointer;
+        for (int i = 0; i < nodeData->count; ++i) {
+            if(strcmp(nodeData->arrayOfEntries[i].string,string) == 0) {
+                int retVal = getTopValues(numOfValues,nodeData->arrayOfEntries[i].avlPtr,type,datesGiven,start,end);
+                return retVal;
+            }
+        }
+        return findForHeap(head->next,string,numOfValues,type,datesGiven,start,end);
+    }
+    else {
+        printf("No cases exist for %s\n",string);
+        return 0;
+    }
+}
+
+void getAllDiseaseStats(hashTable * diseaseTbl, bool datesGiven, date start, date end) {
+    for (int i = 0; i < diseaseTbl->tableSize; ++i) {
+        countHashListEntries(diseaseTbl->table[i],start,end,datesGiven);
+    }
+}
+
+void getAllSickPatients(hashTable * diseaseTbl) {
+    for (int i = 0; i < diseaseTbl->tableSize; ++i) {
+        countHashListSick(diseaseTbl->table[i]);
+    }
+}
+
+void getDiseaseSickPatients(hashTable * diseaseTbl, char * virusName) {
+    int index = hashFunction(virusName,diseaseTbl->tableSize);
+
+    findPatientsForDisease(diseaseTbl->table[index],virusName);
+}
+
+void getDiseaseStats(hashTable * diseaseTbl, char * virusName, bool countryGiven, char *country, date start, date end) {
+    int index = hashFunction(virusName,diseaseTbl->tableSize);
+
+    findCountForDisease(diseaseTbl->table[index],virusName,countryGiven,country,start,end);
+}
+
+int getEntryTopValues(hashTable * hashT,char * string,int numOfValues,char type,bool datesGiven,date start,date end) {
+    int index = hashFunction(string,hashT->tableSize);
+
+    return findForHeap(hashT->table[index],string,numOfValues,type,datesGiven,start,end);
+}

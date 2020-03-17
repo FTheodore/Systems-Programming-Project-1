@@ -118,20 +118,14 @@ void updateHeight(avlNode * node) {
 
 int insertToAvlList(listNode ** listHead, listNode * patientRecord) {
     // insert a new pointer to a record, to the end of a list of an avl node
-    if(*listHead == NULL) { // empty list check
+    if(*listHead == NULL) { // reached end of list
         *listHead = initListNodeOfAvl(patientRecord);
         if(*listHead == NULL)
             return -1;
         return 0;
     }
-    else if((*listHead)->next != NULL)
+    else
         return insertToAvlList(&(*listHead)->next,patientRecord);
-    else { // reached end of list
-        (*listHead)->next = initListNodeOfAvl(patientRecord);
-        if((*listHead)->next == NULL)
-            return -1;
-        return 0;
-    }
 }
 
 int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, avlNode ** treeRoot) {
@@ -259,5 +253,62 @@ void printAvlTree(avlNode * root) {
         printAvlList(root->listHead);
 
         printAvlTree(root->rChild);
+    }
+}
+
+void countAvlListEntries(listNode * head, int * count) {
+    if(head != NULL) {
+        *count += 1;
+        countAvlListEntries(head->next,count);
+    }
+}
+
+void countAvlListPatients(listNode * head, int * count) {
+    if(head != NULL) {
+        listNode * patientPtr = head->dataPointer;
+        patientRecord * patientData = patientPtr->dataPointer;
+        if(noValue(patientData->exitDate))
+            *count += 1;
+
+        countAvlListEntries(head->next,count);
+    }
+}
+
+void countAvlListEntriesByCountry(listNode * head, int * count, bool countryGiven, char * country) {
+    if(head != NULL) {
+        listNode * patientPtr = head->dataPointer;
+        patientRecord * patientData = patientPtr->dataPointer;
+        if(!countryGiven || strcmp(country,patientData->country) == 0)
+            *count += 1;
+        countAvlListEntriesByCountry(head->next,count, countryGiven, country);
+    }
+}
+
+void countAvlTreeEntries(avlNode * root, int * count, bool datesGiven, date start, date end) {
+    if(root != NULL) {
+        if(!datesGiven || (cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0))
+            countAvlListEntries(root->listHead,count);
+
+        countAvlTreeEntries(root->lChild,count,datesGiven,start,end);
+        countAvlTreeEntries(root->rChild,count,datesGiven,start,end);
+    }
+}
+
+void countAvlTreePatients(avlNode * root, int * count) {
+    if(root != NULL) {
+        countAvlListPatients(root->listHead,count);
+
+        countAvlTreePatients(root->lChild,count);
+        countAvlTreePatients(root->rChild,count);
+    }
+}
+
+void countAvlTreeEntriesByCountry(avlNode * root,int * count,bool countryGiven,char * country,date start,date end) {
+    if(root != NULL) {
+        if(cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0)
+            countAvlListEntriesByCountry(root->listHead,count,countryGiven,country);
+
+        countAvlTreeEntriesByCountry(root->lChild,count,countryGiven,country,start,end);
+        countAvlTreeEntriesByCountry(root->rChild,count,countryGiven,country,start,end);
     }
 }

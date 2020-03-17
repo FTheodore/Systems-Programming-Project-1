@@ -119,19 +119,22 @@ int insertAvlListToHeap(listNode * head, heapNode ** heapRoot, char type) {
         return 0;
 }
 
-int buildHeap(avlNode * avlRoot, heapNode ** heapRoot, char type) {
+int buildHeap(avlNode * avlRoot, heapNode ** heapRoot, char type, bool datesGiven, date start, date end) {
     // build a new heap from the elements of a avl tree
     if(avlRoot != NULL) {
         int retVal;
-        retVal = insertAvlListToHeap(avlRoot->listHead, heapRoot, type);
+
+        if(!datesGiven || (cmpDates(&start, &avlRoot->nodeDate) <= 0  && cmpDates(&avlRoot->nodeDate, &end) <= 0)) {
+            retVal = insertAvlListToHeap(avlRoot->listHead, heapRoot, type);
+            if(retVal)
+                return -1;
+        }
+
+        retVal = buildHeap(avlRoot->lChild, heapRoot, type, datesGiven, start, end);
         if(retVal)
             return -1;
 
-        retVal = buildHeap(avlRoot->lChild, heapRoot, type);
-        if(retVal)
-            return -1;
-
-        retVal = buildHeap(avlRoot->rChild, heapRoot, type);
+        retVal = buildHeap(avlRoot->rChild, heapRoot, type, datesGiven, start, end);
         if(retVal)
             return -1;
 
@@ -277,13 +280,16 @@ void freeHeap(heapNode ** root) {
     }
 }
 
-int getTopValues(int numOfValues, avlNode * avlRoot, char type) {
+int getTopValues(int numOfValues, avlNode * avlRoot, char type, bool datesGiven, date start, date end) {
     heapNode * heapRoot = NULL;
     //first build the heap
     int retVal;
-    retVal = buildHeap(avlRoot, &heapRoot, type);
+    retVal = buildHeap(avlRoot, &heapRoot, type, datesGiven, start, end);
     if(retVal)
         return -1;
+
+    if(heapRoot == NULL) // no entries found
+        return 0;
 
     buildMaxHeap(heapRoot, &heapRoot); // sort it
 

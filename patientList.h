@@ -17,5 +17,6 @@ bool checkInsertRecord(listNode ** head, patientRecord buffer, int * errNo, list
 void freePatientData(patientRecord ** ptr);
 void freeRecordsList(listNode ** head);
 void printRecordsList(listNode * head);
+void updateExitDate(listNode * head, date newDate, char * patientId);
 
 #endif //SYSPRO_1_PATIENTLIST_H

@@ -318,7 +318,7 @@ hashTable * diseaseHashTbl, hashTable * countryHashTbl) {
 
     //check if dates are correct
     if(!datesCorrect(&recordBuffer->entryDate,&recordBuffer->exitDate)) {
-        printf("Could not insert patient, dates are not correct.\n");
+        printf("Could not insert patient with id #%s\n",recordBuffer->patientId);
         return 0;
     }
 
@@ -328,7 +328,7 @@ hashTable * diseaseHashTbl, hashTable * countryHashTbl) {
         return -1;
 
     if(!recordInserted) {
-        printf("Could not insert patient, he is a duplicate.\n");
+        printf("Could not insert patient with id #%s, he is a duplicate\n",recordBuffer->patientId);
         return 0;
     }
 
@@ -347,10 +347,11 @@ bool datesCorrect(date * entryDate, date * exitDate) {
     if(exitDate->year == 0 && exitDate->month == 0 && exitDate->day == 0)
         return true;
 
-    if(cmpDates(entryDate,exitDate) > 0)
-        return false;
+    if(cmpDates(entryDate,exitDate) <= 0)
+        return true;
 
-    return true;
+    printf("The dates given are incorrect\n");
+    return false;
 }
 
 void getDates(char * inputBuff,int startDateInd,int endDateInd,date * start,date * end) {
@@ -379,10 +380,9 @@ int processInputAndCallHeap(char * inputBuffer,char type,hashTable * hash) {
     }
     else if(getArgumentsNum(inputBuffer) == 5) {
         getDates(inputBuffer,4,5,&start,&end);
-        if(!datesCorrect(&start,&end)) {
-            printf("The dates specified are incorrect\n");
+        if(!datesCorrect(&start,&end))
             return 0;
-        }
+
         retVal = getEntryTopValues(hash,string,atoi(num),type,true,start,end);
         if(retVal)
             return -1;

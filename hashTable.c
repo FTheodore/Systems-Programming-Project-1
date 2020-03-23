@@ -25,7 +25,7 @@ hashTable * initHashTable(int tableSize, int bucketSize) { // initialize a new h
     return newTable;
 }
 
-listNode * initBucketNode(int maxEntriesInBucket) {
+listNode * initBucketNode(int maxEntriesInBucket) { // initialize a new bucket node
     listNode * newNode;
 
     newNode = malloc(sizeof(listNode));
@@ -51,7 +51,7 @@ listNode * initBucketNode(int maxEntriesInBucket) {
     return newNode;
 }
 
-int idToInt(char const * string) {
+int idToInt(char const * string) { // get arithmetic key value from an id in order to hash
     int sum = 0;
     int j = 0;
     for(int i = ((int)strlen(string) - 1); i >= 0; --i) {
@@ -97,7 +97,7 @@ listNode ** retAddress, int maxEntries, bool * noSpace) {
 int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode * recordPointer) {
     int retVal;
 
-    for (int i = 0; i < node->count; ++i) {
+    for (int i = 0; i < node->count; ++i) { // check if same bucket entry already exists
         if(strcmp(newString,node->arrayOfEntries[i].string) == 0) {
             retVal = insertToAvlTree(&node->arrayOfEntries[i].avlPtr,newDate,\
             recordPointer,&node->arrayOfEntries[i].avlPtr);
@@ -118,7 +118,7 @@ int insertToBucket(bucketNode * node, char * newString, date * newDate, listNode
     if(retVal)
         return -1;
 
-    ++(node->count);
+    node->count += 1;
     return 0;
 }
 
@@ -144,7 +144,7 @@ int insertToHashTable(hashTable * hashT, char * newString, date * newDate, listN
     if(entryExists || !noSpace) {
         return insertToBucket(nodeToInsert->dataPointer,newString,newDate,recordPointer);
     }
-    else { // need to create new entry and the bucket node is full
+    else { // need to create new bucket node because the bucket node is full
        nodeToInsert->next = initBucketNode(hashT->maxEntriesInBucket);
        if(nodeToInsert->next == NULL)
            return -1;
@@ -202,11 +202,12 @@ void printHashTable(hashTable * hashT) {
 }
 
 void countHashListEntries(listNode * head, date start, date end, bool datesGiven) {
+    // count number of cases for every disease in a bucket
     if(head != NULL) {
         bucketNode * nodeData = head->dataPointer;
         for (int i = 0; i < nodeData->count; ++i) {
             int count = 0;
-            countAvlTreeEntries(nodeData->arrayOfEntries[i].avlPtr,&count,datesGiven,start,end);
+            countAvlTreeEntries(nodeData->arrayOfEntries[i].avlPtr,&count,datesGiven,false,NULL,start,end);
             printf("Disease: %s , Number of cases: %d\n",nodeData->arrayOfEntries[i].string,count);
         }
         countHashListEntries(head->next,start,end,datesGiven);
@@ -214,6 +215,7 @@ void countHashListEntries(listNode * head, date start, date end, bool datesGiven
 }
 
 void countHashListSick(listNode * head) {
+    // count number of not treated cases for every disease in a bucket
     if(head != NULL) {
         bucketNode * nodeData = head->dataPointer;
         for (int i = 0; i < nodeData->count; ++i) {
@@ -226,12 +228,13 @@ void countHashListSick(listNode * head) {
 }
 
 void findCountForDisease(listNode * head, char * virusName, bool countryGiven, char *country, date start, date end) {
+    // count number of reported cases for a specific disease in a bucket
     if(head != NULL) {
         bucketNode * nodeData = head->dataPointer;
         for (int i = 0; i < nodeData->count; ++i) {
             if(strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
                 int count = 0;
-                countAvlTreeEntriesByCountry(nodeData->arrayOfEntries[i].avlPtr,&count,countryGiven,country,start,end);
+                countAvlTreeEntries(nodeData->arrayOfEntries[i].avlPtr,&count,true,countryGiven,country,start,end);
                 printf("Number of cases for virus %s are %d\n",nodeData->arrayOfEntries[i].string,count);
                 return;
             }
@@ -243,6 +246,7 @@ void findCountForDisease(listNode * head, char * virusName, bool countryGiven, c
 }
 
 void findPatientsForDisease(listNode * head, char * virusName) {
+    // count number of not treated cases for a specific disease in a bucket
     if(head != NULL) {
         bucketNode * nodeData = head->dataPointer;
         for (int i = 0; i < nodeData->count; ++i) {
@@ -260,6 +264,7 @@ void findPatientsForDisease(listNode * head, char * virusName) {
 }
 
 int findForHeap(listNode * head, char * string,int numOfValues,char type,bool datesGiven,date start,date end) {
+    // find a specific disease or country in a bucket and call max heap in order to get top N countries/diseases
     if(head != NULL) {
         bucketNode * nodeData = head->dataPointer;
         for (int i = 0; i < nodeData->count; ++i) {
@@ -277,24 +282,28 @@ int findForHeap(listNode * head, char * string,int numOfValues,char type,bool da
 }
 
 void getAllDiseaseStats(hashTable * diseaseTbl, bool datesGiven, date start, date end) {
+    // count number of cases for every disease in the hash table
     for (int i = 0; i < diseaseTbl->tableSize; ++i) {
         countHashListEntries(diseaseTbl->table[i],start,end,datesGiven);
     }
 }
 
 void getAllSickPatients(hashTable * diseaseTbl) {
+    // count number of not treated cases for every disease in the hash table
     for (int i = 0; i < diseaseTbl->tableSize; ++i) {
         countHashListSick(diseaseTbl->table[i]);
     }
 }
 
 void getDiseaseSickPatients(hashTable * diseaseTbl, char * virusName) {
+    // count number of not treated cases for a specific disease in the hash table
     int index = hashFunction(virusName,diseaseTbl->tableSize);
 
     findPatientsForDisease(diseaseTbl->table[index],virusName);
 }
 
 void getDiseaseStats(hashTable * diseaseTbl, char * virusName, bool countryGiven, char *country, date start, date end) {
+    // count number of cases for a specific disease in the hash table
     int index = hashFunction(virusName,diseaseTbl->tableSize);
 
     findCountForDisease(diseaseTbl->table[index],virusName,countryGiven,country,start,end);

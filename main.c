@@ -19,6 +19,11 @@ int main(int argc, char * argv[]) {
     if(retVal)
         exit(-1);
 
+    if(bucketSize < sizeof(bucketEntry) + sizeof(listNode *)) {
+        printf("Bucket too small\n");
+        exit(-1);
+    }
+
     //open the file with the records
     retVal = openFile(&fp, recordsFileName);
     if(retVal)
@@ -96,9 +101,7 @@ int main(int argc, char * argv[]) {
                 getAllDiseaseStats(diseaseHashTbl,false,start,end);
             else if(getArgumentsNum(inputBuffer) == 3) {
                 getDates(inputBuffer,2,3,&start,&end);
-                if(!datesCorrect(&start,&end))
-                    printf("The dates specified are incorrect\n");
-                else
+                if(datesCorrect(&start,&end))
                     getAllDiseaseStats(diseaseHashTbl,true,start,end);
             }
             else
@@ -112,9 +115,7 @@ int main(int argc, char * argv[]) {
 
             if(getArgumentsNum(inputBuffer) == 4) {
                 getDates(inputBuffer,3,4,&start,&end);
-                if(!datesCorrect(&start,&end))
-                    printf("The dates specified are incorrect\n");
-                else
+                if(datesCorrect(&start,&end))
                     getDiseaseStats(diseaseHashTbl,virusName,false,NULL,start,end);
             }
             else if(getArgumentsNum(inputBuffer) == 5) {
@@ -122,9 +123,7 @@ int main(int argc, char * argv[]) {
                 getNthArgument(inputBuffer,country,3);
 
                 getDates(inputBuffer,4,5,&start,&end);
-                if(!datesCorrect(&start,&end))
-                    printf("The dates specified are incorrect\n");
-                else
+                if(datesCorrect(&start,&end))
                     getDiseaseStats(diseaseHashTbl,virusName,true,country,start,end);
             }
             else

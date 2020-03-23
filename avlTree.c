@@ -151,12 +151,10 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
 
         if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
             if(leftSubtreeBigger((*node)->rChild)) { // RL case
-                printf("RL\n");
                 rotateRight(treeRoot,(*node)->rChild);
                 rotateLeft(treeRoot,*node);
             }
             else { // RR case
-                printf("RR\n");
                 rotateLeft(treeRoot,*node);
             }
 
@@ -174,12 +172,10 @@ int insertToAvlTree(avlNode ** node, date * newDate, listNode * patientRecord, a
 
         if(heightDiff > 1 || heightDiff < -1) { // need to rebalance
             if(!leftSubtreeBigger((*node)->lChild)) { // LR case
-                printf("LR\n");
                 rotateLeft(treeRoot,(*node)->lChild);
                 rotateRight(treeRoot,*node);
             }
             else { // LL case
-                printf("LL\n");
                 rotateRight(treeRoot,*node);
             }
 
@@ -256,25 +252,28 @@ void printAvlTree(avlNode * root) {
     }
 }
 
-void countAvlListEntries(listNode * head, int * count) {
-    if(head != NULL) {
-        *count += 1;
-        countAvlListEntries(head->next,count);
-    }
-}
+//void countAvlListEntries(listNode * head, int * count) {
+//    // count number of cases in a avl node
+//    if(head != NULL) {
+//        *count += 1;
+//        countAvlListEntries(head->next,count);
+//    }
+//}
 
 void countAvlListPatients(listNode * head, int * count) {
+    // count number of not treated cases in a avl node
     if(head != NULL) {
         listNode * patientPtr = head->dataPointer;
         patientRecord * patientData = patientPtr->dataPointer;
         if(noValue(patientData->exitDate))
             *count += 1;
 
-        countAvlListEntries(head->next,count);
+        countAvlListPatients(head->next,count);
     }
 }
 
 void countAvlListEntriesByCountry(listNode * head, int * count, bool countryGiven, char * country) {
+    // count number of cases in a avl node
     if(head != NULL) {
         listNode * patientPtr = head->dataPointer;
         patientRecord * patientData = patientPtr->dataPointer;
@@ -284,17 +283,20 @@ void countAvlListEntriesByCountry(listNode * head, int * count, bool countryGive
     }
 }
 
-void countAvlTreeEntries(avlNode * root, int * count, bool datesGiven, date start, date end) {
-    if(root != NULL) {
-        if(!datesGiven || (cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0))
-            countAvlListEntries(root->listHead,count);
-
-        countAvlTreeEntries(root->lChild,count,datesGiven,start,end);
-        countAvlTreeEntries(root->rChild,count,datesGiven,start,end);
-    }
-}
+//void countAvlTreeEntries(avlNode * root, int * count, bool datesGiven, date start, date end) {
+//    if(root != NULL) {
+//        if(!datesGiven || (cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0))
+//            countAvlListEntriesByCountry(root->listHead,count,false,NULL);
+//
+//        if(!datesGiven || cmpDates(&start, &root->nodeDate) < 0) // check if left subtree might have valid dates
+//            countAvlTreeEntries(root->lChild,count,datesGiven,start,end);
+//        if(!datesGiven || cmpDates(&end, &root->nodeDate) > 0) // check if right subtree might have valid dates
+//            countAvlTreeEntries(root->rChild,count,datesGiven,start,end);
+//    }
+//}
 
 void countAvlTreePatients(avlNode * root, int * count) {
+    // count number of not treated cases in a avl tree
     if(root != NULL) {
         countAvlListPatients(root->listHead,count);
 
@@ -303,12 +305,15 @@ void countAvlTreePatients(avlNode * root, int * count) {
     }
 }
 
-void countAvlTreeEntriesByCountry(avlNode * root,int * count,bool countryGiven,char * country,date start,date end) {
+void countAvlTreeEntries(avlNode * root,int * count,bool datesGiven,bool countryGiven,char * country,date start,date end) {
+    // count number of cases in a avl tree
     if(root != NULL) {
-        if(cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0)
+        if(!datesGiven || (cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0))
             countAvlListEntriesByCountry(root->listHead,count,countryGiven,country);
 
-        countAvlTreeEntriesByCountry(root->lChild,count,countryGiven,country,start,end);
-        countAvlTreeEntriesByCountry(root->rChild,count,countryGiven,country,start,end);
+        if(!datesGiven || cmpDates(&start, &root->nodeDate) < 0) // check if left subtree might have valid dates
+            countAvlTreeEntries(root->lChild,count,datesGiven,countryGiven,country,start,end);
+        if(!datesGiven || cmpDates(&end, &root->nodeDate) > 0) // check if right subtree might have valid dates
+            countAvlTreeEntries(root->rChild,count,datesGiven,countryGiven,country,start,end);
     }
 }

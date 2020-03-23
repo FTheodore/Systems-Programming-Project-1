@@ -93,6 +93,7 @@ int insertHeapNode(heapNode ** currentNode, char * newString, heapNode ** heapRo
 }
 
 int insertAvlListToHeap(listNode * head, heapNode ** heapRoot, char type) {
+    // update counters of heap based on all entries of an avl node
     if(head != NULL) {
         bool foundNode = false;
         patientRecord * ptr = ((listNode *)head->dataPointer)->dataPointer;

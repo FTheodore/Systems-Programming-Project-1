@@ -42,8 +42,8 @@ listNode * initBucketNode(int maxEntriesInBucket) { // initialize a new bucket n
         return NULL;
 
     for (int i = 0; i < maxEntriesInBucket; ++i) {
-        ((bucketNode *)newNode->dataPointer)->arrayOfEntries->string = NULL;
-        ((bucketNode *)newNode->dataPointer)->arrayOfEntries->avlPtr = NULL;
+        ((bucketNode *)newNode->dataPointer)->arrayOfEntries[i].string = NULL;
+        ((bucketNode *)newNode->dataPointer)->arrayOfEntries[i].avlPtr = NULL;
     }
 
     ((bucketNode *)newNode->dataPointer)->count = 0;

@@ -283,18 +283,6 @@ void countAvlListEntriesByCountry(listNode * head, int * count, bool countryGive
     }
 }
 
-//void countAvlTreeEntries(avlNode * root, int * count, bool datesGiven, date start, date end) {
-//    if(root != NULL) {
-//        if(!datesGiven || (cmpDates(&start, &root->nodeDate) <= 0  && cmpDates(&root->nodeDate, &end) <= 0))
-//            countAvlListEntriesByCountry(root->listHead,count,false,NULL);
-//
-//        if(!datesGiven || cmpDates(&start, &root->nodeDate) < 0) // check if left subtree might have valid dates
-//            countAvlTreeEntries(root->lChild,count,datesGiven,start,end);
-//        if(!datesGiven || cmpDates(&end, &root->nodeDate) > 0) // check if right subtree might have valid dates
-//            countAvlTreeEntries(root->rChild,count,datesGiven,start,end);
-//    }
-//}
-
 void countAvlTreePatients(avlNode * root, int * count) {
     // count number of not treated cases in a avl tree
     if(root != NULL) {

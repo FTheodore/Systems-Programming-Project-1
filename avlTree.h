@@ -22,7 +22,6 @@ void freeAvlList(listNode ** head);
 void freeAvlTree(avlNode ** root);
 void printAvlList(listNode * head);
 void printAvlTree(avlNode * root);
-//void countAvlTreeEntries(avlNode * root, int * count, bool datesGiven, date start, date end);
 void countAvlTreeEntries(avlNode * root,int * count,bool datesGiven,bool countryGiven,char * country,date start,date end);
 void countAvlTreePatients(avlNode * root, int * count);
 

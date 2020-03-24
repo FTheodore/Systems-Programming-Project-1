@@ -174,6 +174,7 @@ void freeHashTable(hashTable ** hashT) {
             freeBucketList(&(*hashT)->table[i]);
     }
 
+    free((*hashT)->table);
     free(*hashT);
 }
 
@@ -214,19 +215,6 @@ void countHashListEntries(listNode * head, date start, date end, bool datesGiven
     }
 }
 
-void countHashListSick(listNode * head) {
-    // count number of not treated cases for every disease in a bucket
-    if(head != NULL) {
-        bucketNode * nodeData = head->dataPointer;
-        for (int i = 0; i < nodeData->count; ++i) {
-            int count = 0;
-            countAvlTreePatients(nodeData->arrayOfEntries[i].avlPtr,&count);
-            printf("Disease: %s , Number of sick people: %d\n",nodeData->arrayOfEntries[i].string,count);
-        }
-        countHashListSick(head->next);
-    }
-}
-
 void findCountForDisease(listNode * head, char * virusName, bool countryGiven, char *country, date start, date end) {
     // count number of reported cases for a specific disease in a bucket
     if(head != NULL) {
@@ -245,21 +233,22 @@ void findCountForDisease(listNode * head, char * virusName, bool countryGiven, c
         printf("No cases exist for this disease\n");
 }
 
-void findPatientsForDisease(listNode * head, char * virusName) {
-    // count number of not treated cases for a specific disease in a bucket
+void countHashListSick(listNode * head, bool virusGiven, char * virusName) {
+    // count number of not treated cases in a bucket
     if(head != NULL) {
         bucketNode * nodeData = head->dataPointer;
         for (int i = 0; i < nodeData->count; ++i) {
-            if(strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
+            if(!virusGiven || strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
                 int count = 0;
                 countAvlTreePatients(nodeData->arrayOfEntries[i].avlPtr,&count);
                 printf("Number of sick people for virus %s are %d\n",nodeData->arrayOfEntries[i].string,count);
-                return;
+                if(virusGiven)
+                    return;
             }
         }
-        findPatientsForDisease(head->next,virusName);
+        countHashListSick(head->next,virusGiven,virusName);
     }
-    else
+    else if(virusGiven)
         printf("No cases exist for this disease\n");
 }
 
@@ -291,7 +280,7 @@ void getAllDiseaseStats(hashTable * diseaseTbl, bool datesGiven, date start, dat
 void getAllSickPatients(hashTable * diseaseTbl) {
     // count number of not treated cases for every disease in the hash table
     for (int i = 0; i < diseaseTbl->tableSize; ++i) {
-        countHashListSick(diseaseTbl->table[i]);
+        countHashListSick(diseaseTbl->table[i],false,NULL);
     }
 }
 
@@ -299,7 +288,7 @@ void getDiseaseSickPatients(hashTable * diseaseTbl, char * virusName) {
     // count number of not treated cases for a specific disease in the hash table
     int index = hashFunction(virusName,diseaseTbl->tableSize);
 
-    findPatientsForDisease(diseaseTbl->table[index],virusName);
+    countHashListSick(diseaseTbl->table[index],true,virusName);
 }
 
 void getDiseaseStats(hashTable * diseaseTbl, char * virusName, bool countryGiven, char *country, date start, date end) {

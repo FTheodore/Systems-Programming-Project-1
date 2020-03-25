@@ -117,8 +117,12 @@ int readLine(char * line, patientRecord * buffer) {
     if(memErrCheck(exitDate))
         return -1;
 
-    sscanf(line,"%s %s %s %s %s %s %s",buffer->patientId,buffer->firstName,buffer->lastName,\
+    int itemsScanned = sscanf(line,"%s %s %s %s %s %s %s",buffer->patientId,buffer->firstName,buffer->lastName,\
     buffer->diseaseId,buffer->country,entryDate,exitDate);
+    if(itemsScanned != 7) {
+        printf("Error, Patient Records don't have the correct form!\n");
+        return -1;
+    }
 
     // convert dates
     getDate(&buffer->entryDate,entryDate);

@@ -252,14 +252,6 @@ void printAvlTree(avlNode * root) {
     }
 }
 
-//void countAvlListEntries(listNode * head, int * count) {
-//    // count number of cases in a avl node
-//    if(head != NULL) {
-//        *count += 1;
-//        countAvlListEntries(head->next,count);
-//    }
-//}
-
 void countAvlListPatients(listNode * head, int * count) {
     // count number of not treated cases in a avl node
     if(head != NULL) {

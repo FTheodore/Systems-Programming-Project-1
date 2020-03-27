@@ -125,10 +125,14 @@ void updateExitDate(listNode * head, date newDate, char * patientId) {
     if(head != NULL) {
         patientRecord * recordPtr = head->dataPointer;
         if(strcmp(recordPtr->patientId,patientId)==0) {
-            if(!datesCorrect(&recordPtr->entryDate,&newDate))
-                printf("Couldn't update patient record\n");
-            else
+            if(!datesCorrect(&recordPtr->entryDate,&newDate)) {
+                printf("error\n");
+//                printf("Couldn't update patient record\n");
+            }
+            else {
                 copyDate(&recordPtr->exitDate,&newDate);
+                printf("Record updated\n");
+            }
 
             return;
         }
@@ -136,6 +140,6 @@ void updateExitDate(listNode * head, date newDate, char * patientId) {
         updateExitDate(head->next,newDate,patientId);
     }
     else { // no such patient exists
-        printf("No patient with the id given was found\n");
+        printf("Not found\n");
     }
 }

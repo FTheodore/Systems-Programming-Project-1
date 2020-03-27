@@ -281,6 +281,18 @@ void freeHeap(heapNode ** root) {
     }
 }
 
+void outputDupCounts(heapNode * heapRoot, int val) {
+    if(heapRoot != NULL) {
+        if(val == heapRoot->count)
+            printf("%s %d\n", heapRoot->string, heapRoot->count);
+        else // this is a max heap so children will definitely have a smaller count
+            return;
+
+        outputDupCounts(heapRoot->lChild, val);
+        outputDupCounts(heapRoot->rChild, val);
+    }
+}
+
 int getTopValues(int numOfValues, avlNode * avlRoot, char type, bool datesGiven, date start, date end) {
     heapNode * heapRoot = NULL;
     //first build the heap
@@ -297,17 +309,21 @@ int getTopValues(int numOfValues, avlNode * avlRoot, char type, bool datesGiven,
     for (int i = 0; i < numOfValues; ++i) {
         heapNode * nodeOut = heapRoot; // get the node with the highest value
 
-        printf("%d) %s: %d\n", i + 1, nodeOut->string, nodeOut->count);
-
+        printf("%s %d\n", nodeOut->string, nodeOut->count);
 
         if(nodeOut->lChild == NULL && nodeOut->rChild == NULL) // last node
             break;
+
 
         swapRoot(heapRoot, &heapRoot); // replace root with leaf node
         heapify(&heapRoot, heapRoot); // fix max heap
 
         free(nodeOut->string);
         free(nodeOut);
+
+        if(i == numOfValues - 1 && heapRoot->count == nodeOut->count)// output every entry with same count as the k-th
+            outputDupCounts(heapRoot, heapRoot->count);
+
     }
 
     freeHeap(&heapRoot);

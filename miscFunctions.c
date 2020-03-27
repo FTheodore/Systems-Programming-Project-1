@@ -10,7 +10,7 @@ int openFile(FILE ** fp, char * fileName) {
     if(memErrCheck(absolutePath))
         return -1;
 
-    strcpy(absolutePath,"../");
+    strcpy(absolutePath,"./");
     strcat(absolutePath,fileName);
 
     if((*fp = fopen(absolutePath,"r")) == NULL) {

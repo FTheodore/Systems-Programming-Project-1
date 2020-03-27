@@ -64,7 +64,7 @@ int main(int argc, char * argv[]) {
     if(command == NULL)
         exit(-1);
 
-    printf("\n\tPlease enter a command\n>> ");
+//    printf("\n\tPlease enter a command\n>> ");
 
     retVal = getInput(inputBuffer,MAX_LINE_LEN); // read user input from stdin
     if(retVal)
@@ -73,10 +73,10 @@ int main(int argc, char * argv[]) {
     getCommand(inputBuffer,command,ARG_LEN);
 
     //start the user interface
-    while(strcmp(command,"exit") != 0){
+    while(strcmp(command,"/exit") != 0){
         if(strcmp(command,"/insertPatientRecord") == 0) {
             if(getArgumentsNum(inputBuffer) != 8 && getArgumentsNum(inputBuffer) != 7) {
-                printf("Check your input\n");
+                printf("error\n");
             }
             else { // get patient data and insert to data structures
                 retVal = readInput(inputBuffer, &recordBuffer);
@@ -86,6 +86,7 @@ int main(int argc, char * argv[]) {
                 retVal = insertToStructs(&recordsListHead,&recordBuffer,&recordPointer,diseaseHashTbl,countryHashTbl);
                 if(retVal)
                     exit(-1);
+                printf("Record added\n");
             }
         }
         else if(strcmp(command,"/printDiseaseHash") == 0) {
@@ -105,7 +106,7 @@ int main(int argc, char * argv[]) {
                     getAllDiseaseStats(diseaseHashTbl,true,start,end);
             }
             else
-                printf("Wrong input\n");
+                printf("error\n");
         }
         else if(strcmp(command,"/diseaseFrequency") == 0) {
             date start;
@@ -113,21 +114,17 @@ int main(int argc, char * argv[]) {
             char virusName[ARG_LEN];
             getNthArgument(inputBuffer,virusName,2);
 
-            if(getArgumentsNum(inputBuffer) == 4) {
-                getDates(inputBuffer,3,4,&start,&end);
-                if(datesCorrect(&start,&end))
-                    getDiseaseStats(diseaseHashTbl,virusName,false,NULL,start,end);
+            getDates(inputBuffer,3,4,&start,&end);
+            bool countryGiven = false;
+            char country[ARG_LEN];
+            if(getArgumentsNum(inputBuffer) == 5) {
+                getNthArgument(inputBuffer, country, 5);
+                countryGiven = true;
             }
-            else if(getArgumentsNum(inputBuffer) == 5) {
-                char country[ARG_LEN];
-                getNthArgument(inputBuffer,country,3);
 
-                getDates(inputBuffer,4,5,&start,&end);
-                if(datesCorrect(&start,&end))
-                    getDiseaseStats(diseaseHashTbl,virusName,true,country,start,end);
-            }
-            else
-                printf("Wrong input\n");
+            if(datesCorrect(&start,&end))
+                getDiseaseStats(diseaseHashTbl,virusName,countryGiven,country,start,end);
+
         }
         else if(strcmp(command,"/topk-Diseases") == 0) {
             retVal = processInputAndCallHeap(inputBuffer,'d',countryHashTbl);
@@ -151,7 +148,7 @@ int main(int argc, char * argv[]) {
                 updateExitDate(recordsListHead,newDate,patientId);
             }
             else
-                printf("Wrong Input\n");
+                printf("error\n");
         }
         else if(strcmp(command,"/numCurrentPatients") == 0) {
             if(getArgumentsNum(inputBuffer) == 2) {
@@ -163,10 +160,10 @@ int main(int argc, char * argv[]) {
                 getAllSickPatients(diseaseHashTbl);
         }
         else {
-            printf("No such command\n");
+            printf("error\n");
         }
 
-        printf("\n\n>> ");
+//        printf("\n\n>> ");
         retVal = getInput(inputBuffer,MAX_LINE_LEN); // read user input from stdin
         if(retVal)
             exit(-1);
@@ -174,6 +171,7 @@ int main(int argc, char * argv[]) {
         getCommand(inputBuffer,command,ARG_LEN);
     }
 
+    printf("exiting\n");
     //free allocated space
     freeHashTable(&diseaseHashTbl);
     freeHashTable(&countryHashTbl);

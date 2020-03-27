@@ -209,7 +209,7 @@ void countHashListEntries(listNode * head, date start, date end, bool datesGiven
         for (int i = 0; i < nodeData->count; ++i) {
             int count = 0;
             countAvlTreeEntries(nodeData->arrayOfEntries[i].avlPtr,&count,datesGiven,false,NULL,start,end);
-            printf("Disease: %s , Number of cases: %d\n",nodeData->arrayOfEntries[i].string,count);
+            printf("%s %d\n",nodeData->arrayOfEntries[i].string,count);
         }
         countHashListEntries(head->next,start,end,datesGiven);
     }
@@ -223,14 +223,14 @@ void findCountForDisease(listNode * head, char * virusName, bool countryGiven, c
             if(strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
                 int count = 0;
                 countAvlTreeEntries(nodeData->arrayOfEntries[i].avlPtr,&count,true,countryGiven,country,start,end);
-                printf("Number of cases for virus %s are %d\n",nodeData->arrayOfEntries[i].string,count);
+                printf("%s %d\n",nodeData->arrayOfEntries[i].string,count);
                 return;
             }
         }
         findCountForDisease(head->next,virusName,countryGiven,country,start,end);
     }
     else
-        printf("No cases exist for this disease\n");
+        printf("%s 0\n",virusName);
 }
 
 void countHashListSick(listNode * head, bool virusGiven, char * virusName) {
@@ -241,7 +241,7 @@ void countHashListSick(listNode * head, bool virusGiven, char * virusName) {
             if(!virusGiven || strcmp(nodeData->arrayOfEntries[i].string,virusName) == 0) {
                 int count = 0;
                 countAvlTreePatients(nodeData->arrayOfEntries[i].avlPtr,&count);
-                printf("Number of sick people for virus %s are %d\n",nodeData->arrayOfEntries[i].string,count);
+                printf("%s %d\n",nodeData->arrayOfEntries[i].string,count);
                 if(virusGiven)
                     return;
             }
@@ -249,7 +249,7 @@ void countHashListSick(listNode * head, bool virusGiven, char * virusName) {
         countHashListSick(head->next,virusGiven,virusName);
     }
     else if(virusGiven)
-        printf("No cases exist for this disease\n");
+        printf("%s 0\n",virusName);
 }
 
 int findForHeap(listNode * head, char * string,int numOfValues,char type,bool datesGiven,date start,date end) {

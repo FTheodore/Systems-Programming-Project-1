@@ -318,12 +318,11 @@ int getTopValues(int numOfValues, avlNode * avlRoot, char type, bool datesGiven,
         swapRoot(heapRoot, &heapRoot); // replace root with leaf node
         heapify(&heapRoot, heapRoot); // fix max heap
 
-        free(nodeOut->string);
-        free(nodeOut);
-
         if(i == numOfValues - 1 && heapRoot->count == nodeOut->count)// output every entry with same count as the k-th
             outputDupCounts(heapRoot, heapRoot->count);
 
+        free(nodeOut->string);
+        free(nodeOut);
     }
 
     freeHeap(&heapRoot);

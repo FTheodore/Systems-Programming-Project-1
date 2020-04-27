@@ -345,7 +345,7 @@ hashTable * diseaseHashTbl, hashTable * countryHashTbl) {
     retVal = insertToHashTable(countryHashTbl, patientData->country, &patientData->entryDate, *recordPointer);
     if(retVal)
         return -1;
-
+    printf("Record added\n");
     return 0;
 }
 

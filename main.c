@@ -86,7 +86,7 @@ int main(int argc, char * argv[]) {
                 retVal = insertToStructs(&recordsListHead,&recordBuffer,&recordPointer,diseaseHashTbl,countryHashTbl);
                 if(retVal)
                     exit(-1);
-                printf("Record added\n");
+
             }
         }
         else if(strcmp(command,"/printDiseaseHash") == 0) {
